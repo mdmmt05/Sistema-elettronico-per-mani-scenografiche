@@ -1,0 +1,12 @@
+﻿Designator,Footprint,Quantity,Value,LCSC Part #
+A1,Arduino_Mega2560_R3_Shield,1,Arduino_Mega2560_R3_Shield,
+C1,0402,1,10uF,
+C2,CP_Elec_8x10.5,1,1000uF,
+C3,0402,1,100nF,
+J1,PinHeader_1x02_P2.54mm_Vertical,1,PW,
+J3,PinHeader_1x03_P2.54mm_Vertical,1,Servo1,
+J4,PinHeader_1x03_P2.54mm_Vertical,1,Servo2,
+J5,PinHeader_1x03_P2.54mm_Vertical,1,Servo3,
+J6,PinHeader_1x03_P2.54mm_Vertical,1,Servo4,
+J7,PinHeader_1x03_P2.54mm_Vertical,1,Servo5,
+J8,PinHeader_2x04_P2.54mm_Vertical,1,Radio,

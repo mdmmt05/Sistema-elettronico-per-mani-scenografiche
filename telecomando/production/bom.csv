@@ -1,0 +1,8 @@
+﻿Designator,Footprint,Quantity,Value,LCSC Part #
+A1,Arduino_Nano,1,Arduino_Nano_v3.x,
+C1,0402,1,10uF,
+C2,0402,1,100nF,
+J1,PinHeader_1x02_P2.54mm_Vertical,1,P_IN,
+J8,PinHeader_2x04_P2.54mm_Vertical,1,Radio,
+"R3, R4, R5, R6, R7, R8, R9",0402,7,10k,
+"SW1, SW2, SW3, SW4, SW5, SW6, SW7",SW_Cherry_MX_1.00u_PCB,7,SW_Push,
