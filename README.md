@@ -28,15 +28,7 @@ Il progetto include firmware Arduino per entrambe le unità di controllo e per i
 
 ## 📸 Demo
 
-<div align="center">
-
-<!-- Sostituire con immagini o video reali del carro e delle mani in azione -->
-
-| !(./natoduevolte.mp4) | !(./mano.mp4) |
-|:---------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|
-| *Il carro "Nato Due Volte" in sfilata* | *Le mani scenografiche robotizzate in funzione* |
-
-</div>
+Apri i video natoduevolte.mp4 e mano.mp4 per osservare il risultato di questo progetto.
 
 ---
 
@@ -120,15 +112,7 @@ The repository includes Arduino firmware for both the control units and the remo
 
 ## 📸 Demo
 
-<div align="center">
-
-<!-- Replace with actual photos or video of the float and hands in action -->
-
-| ![placeholder](https://placehold.co/380x220/1F4E79/FFFFFF?text=Float+Photo) | ![placeholder](https://placehold.co/380x220/2E75B6/FFFFFF?text=Hands+in+Action) |
-|:----------------------------------------------------------------------------:|:--------------------------------------------------------------------------------:|
-| *The "Nato Due Volte" float during the parade* | *The scenic robotic hands in operation* |
-
-</div>
+Open videos natoduevolte.mp4 and mano.mp4 to see this project in action.
 
 ---
 
