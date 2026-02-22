@@ -32,40 +32,15 @@ Il progetto include firmware Arduino per entrambe le unità di controllo e per i
 
 <!-- Sostituire con immagini o video reali del carro e delle mani in azione -->
 
-| ![placeholder](https://placehold.co/380x220/1F4E79/FFFFFF?text=Foto+Carro) | ![placeholder](https://placehold.co/380x220/2E75B6/FFFFFF?text=Mani+in+azione) |
+| !(./natoduevolte.mp4) | !(./mano.mp4) |
 |:---------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|
 | *Il carro "Nato Due Volte" in sfilata* | *Le mani scenografiche robotizzate in funzione* |
-
-> 📹 **Video dimostrativo:** *(link da aggiungere)*
 
 </div>
 
 ---
 
 ## 🔧 Hardware e Componenti
-
-### Panoramica del sistema
-
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                        SISTEMA COMPLESSIVO                          │
-│                                                                     │
-│   ┌──────────────────┐        RF 2.4 GHz        ┌───────────────┐  │
-│   │   TELECOMANDO    │ ───────────────────────► │  CONTROLLER   │  │
-│   │  Arduino Nano    │                           │  #1 (MANO SX) │  │
-│   │  + nRF24L01+     │                           │  Arduino Mega │  │
-│   │  7 pulsanti      │ ───────────────────────► │  + nRF24L01+  │  │
-│   └──────────────────┘        RF 2.4 GHz        │  5 servo      │  │
-│                                                  └───────────────┘  │
-│                                                  ┌───────────────┐  │
-│                                                  │  CONTROLLER   │  │
-│                                                  │  #2 (MANO DX) │  │
-│                                                  │  Arduino Mega │  │
-│                                                  │  + nRF24L01+  │  │
-│                                                  │  5 servo      │  │
-│                                                  └───────────────┘  │
-└─────────────────────────────────────────────────────────────────────┘
-```
 
 ### Componenti per unità
 
@@ -153,36 +128,11 @@ The repository includes Arduino firmware for both the control units and the remo
 |:----------------------------------------------------------------------------:|:--------------------------------------------------------------------------------:|
 | *The "Nato Due Volte" float during the parade* | *The scenic robotic hands in operation* |
 
-> 📹 **Demo video:** *(link to be added)*
-
 </div>
 
 ---
 
 ## 🔧 Hardware & Components
-
-### System overview
-
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                          FULL SYSTEM                                │
-│                                                                     │
-│   ┌──────────────────┐        RF 2.4 GHz        ┌───────────────┐  │
-│   │   REMOTE CTRL    │ ───────────────────────► │  CONTROLLER   │  │
-│   │  Arduino Nano    │                           │  #1 (L HAND)  │  │
-│   │  + nRF24L01+     │                           │  Arduino Mega │  │
-│   │  7 buttons       │ ───────────────────────► │  + nRF24L01+  │  │
-│   └──────────────────┘        RF 2.4 GHz        │  5 servos     │  │
-│                                                  └───────────────┘  │
-│                                                  ┌───────────────┐  │
-│                                                  │  CONTROLLER   │  │
-│                                                  │  #2 (R HAND)  │  │
-│                                                  │  Arduino Mega │  │
-│                                                  │  + nRF24L01+  │  │
-│                                                  │  5 servos     │  │
-│                                                  └───────────────┘  │
-└─────────────────────────────────────────────────────────────────────┘
-```
 
 ### Component list
 
