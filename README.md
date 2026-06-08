@@ -96,6 +96,9 @@ nato-due-volte/
 
 Per istruzioni complete su collegamento hardware, alimentazione e risoluzione dei problemi, consultare il **[manuale di installazione](./manuale_di_installazione.docx)**.
 
+### Foto
+![1771791220092](1771791220092.jpeg)
+
 ---
 
 ---
@@ -179,6 +182,9 @@ nato-due-volte/
 3. Upload the sketch. No additional configuration required.
 
 For complete hardware wiring, power supply, and troubleshooting instructions, refer to the **[installation manual](./manuale_di_installazione.docx)**.
+
+### Photos
+![1771791220092](1771791220092.jpeg)
 
 ---
 
