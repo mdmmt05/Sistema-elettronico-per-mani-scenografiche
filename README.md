@@ -1,192 +1,195 @@
-# 🤲 Nato Due Volte — Sistema di Controllo delle Mani Scenografiche
+# Nato Due Volte — Scenic Robotic Hands Control System
 
 <div align="center">
 
 ![Arduino](https://img.shields.io/badge/Arduino-Mega%202560%20%7C%20Nano-00878F?style=for-the-badge&logo=arduino&logoColor=white)
 ![RF24](https://img.shields.io/badge/RF24-nRF24L01%2B-blue?style=for-the-badge)
-![Language](https://img.shields.io/badge/Linguaggio-C%2B%2B%20%2F%20Arduino-orange?style=for-the-badge)
-![Event](https://img.shields.io/badge/Carnevale%20di%20Massafra-73%C2%AA%20edizione-purple?style=for-the-badge)
-![License](https://img.shields.io/badge/Licenza-MIT-green?style=for-the-badge)
+![Language](https://img.shields.io/badge/Language-C%2B%2B%20%2F%20Arduino-orange?style=for-the-badge)
+![Event](https://img.shields.io/badge/Carnevale%20di%20Massafra-73rd%20edition-purple?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 </div>
 
----
-
-> 🇮🇹 [Italiano](#-descrizione-del-progetto) · 🇬🇧 [English](#-project-description)
+> 🇮🇹 [Italiano](#italiano) · 🇬🇧 [English](#english)
 
 ---
 
-## 🇮🇹 Descrizione del Progetto
+# Italiano
 
-**Nato Due Volte** è un carro carnevalesco presentato alla **73ª edizione del Carnevale di Massafra**. Il sistema descritto in questa repository gestisce due **mani scenografiche robotizzate**, ciascuna composta da cinque dita ad attuazione indipendente tramite servomotori.
+## Descrizione
 
-Il cuore del sistema è una comunicazione wireless in radiofrequenza tra un **telecomando palmare personalizzato** e due **unità di controllo indipendenti**, una per mano. Ogni unità è basata su una shield Arduino progettata su misura che integra il modulo RF e i connettori per i servomotori. Il telecomando permette di inviare fino a **7 comandi di movimento** a ciascuna mano, selezionabili tramite una combinazione di due pressioni di pulsante.
+**Nato Due Volte** è un carro carnevalesco presentato alla **73ª edizione del Carnevale di Massafra**. Questa repository documenta il sistema elettronico e firmware realizzato per controllare due **mani scenografiche robotizzate**, ciascuna dotata di cinque dita mosse indipendentemente da servomotori.
 
-Il progetto include firmware Arduino per entrambe le unità di controllo e per il telecomando, oltre al manuale di installazione completo.
+Il sistema utilizza un **telecomando palmare personalizzato** che comunica via radio con due unità di controllo indipendenti, una per mano. Ogni unità è basata su Arduino Mega 2560 e su una shield progettata su misura; il telecomando è basato su Arduino Nano con una propria shield dedicata.
 
----
+## Stato e validazione
 
-## 📸 Demo
+Questo progetto è stato **progettato, costruito, programmato, integrato e collaudato fisicamente** per l'impiego sul carro.
 
-Apri i video natoduevolte.mp4 e mano.mp4 per osservare il risultato di questo progetto.
+A differenza di altri repository presenti nel profilo, la progettazione elettronica, il firmware e l'integrazione sono stati svolti **prevalentemente direttamente dall'autore**, con un approccio hands-on. Il sistema è stato inoltre testato in condizioni operative reali.
 
----
+Il progetto rappresenta quindi uno dei lavori più direttamente indicativi delle competenze pratiche dell'autore in elettronica embedded, PCB, integrazione hardware-software e collaudo.
 
-## 🔧 Hardware e Componenti
+## Obiettivi progettuali
 
-### Componenti per unità
+I requisiti principali erano:
 
-| Componente | Quantità | Note |
-|---|---|---|
-| Arduino Mega 2560 | 2 | Unità di controllo (una per mano) |
+- controllo indipendente di due mani;
+- cinque servomotori per mano;
+- comando wireless affidabile;
+- interfaccia semplice per un operatore non tecnico;
+- installazione e manutenzione semplici durante l'allestimento del carro;
+- alimentazione separata e adeguata al carico dei servomotori;
+- possibilità di selezionare più sequenze/movimenti per ciascuna mano.
+
+## Architettura
+
+```mermaid
+flowchart LR
+    OP[Operatore] --> REMOTE[Telecomando
+Arduino Nano]
+    REMOTE -->|nRF24L01+| CTRL1[Controller mano 1
+Arduino Mega]
+    REMOTE -->|nRF24L01+| CTRL2[Controller mano 2
+Arduino Mega]
+    CTRL1 --> S1[5 servomotori]
+    CTRL2 --> S2[5 servomotori]
+```
+
+Il telecomando consente di inviare fino a **7 comandi di movimento** a ciascuna mano mediante combinazioni di pulsanti.
+
+## Hardware
+
+| Componente | Quantità | Funzione |
+|---|---:|---|
+| Arduino Mega 2560 | 2 | Unità di controllo delle mani |
 | Arduino Nano | 1 | Telecomando |
-| Modulo nRF24L01+ | 3 | Un modulo per ogni scheda |
-| Shield personalizzata (Mega) | 2 | Progettata su misura — include connettori J1–J7 |
-| Shield personalizzata (Nano) | 1 | Progettata su misura — include 7 pulsanti |
-| Servomotori | 10 | 5 per mano, connettore 3 pin (DATA / 5V / GND) |
-| Alimentatore 5V / min. 8A | 2 | Uno per unità di controllo |
-| Powerbank 5V | 1 | Alimentazione telecomando via USB-C |
+| nRF24L01+ | 3 | Comunicazione radio |
+| Shield personalizzata Mega | 2 | RF, connettori e distribuzione segnali |
+| Shield personalizzata Nano | 1 | Pulsanti e modulo RF |
+| Servomotori | 10 | Attuazione delle dita |
+| Alimentatore 5 V / min. 8 A | 2 | Alimentazione delle mani |
+| Powerbank 5 V | 1 | Alimentazione telecomando |
 
-### Connessione servomotori (shield Mega)
+### Collegamento servomotori
 
-| Connettore shield | Indice firmware | Dito |
-|:-----------------:|:---------------:|:----:|
+| Connettore | Indice firmware | Dito |
+|---|---:|---|
 | J3 | 0 | Pollice |
 | J4 | 1 | Indice |
 | J5 | 2 | Medio |
 | J6 | 3 | Anulare |
 | J7 | 4 | Mignolo |
 
----
+## Repository
 
-## 📂 Struttura della Repository
-
-```
+```text
 nato-due-volte/
-├── controller_code.ino          # Firmware unità di controllo (Arduino Mega)
-├── code_telecomando.ino         # Firmware telecomando (Arduino Nano)
-└── manuale_di_installazione.docx  # Manuale di installazione completo (IT/EN)
+├── controller_code.ino
+├── code_telecomando.ino
+└── manuale_di_installazione.docx
 ```
 
----
+## Installazione firmware
 
-## ⚙️ Installazione del Firmware
+Prerequisiti:
 
-### Prerequisiti
-- Arduino IDE
-- Libreria **RF24** (installabile dal Library Manager dell'Arduino IDE)
+- Arduino IDE;
+- libreria RF24.
 
-### Unità di controllo (Arduino Mega)
+Per ogni Arduino Mega, impostare `USE_FIRST` in modo coerente con il controller da programmare, quindi caricare `controller_code.ino`. Caricare `code_telecomando.ino` sull'Arduino Nano.
 
-1. Aprire `controller_code.ino` nell'Arduino IDE.
-2. Alla riga `#define USE_FIRST`, impostare:
-   - `true` per il **controller #1**
-   - `false` per il **controller #2**
-3. Selezionare **Arduino Mega or Mega 2560** come scheda target.
-4. Caricare lo sketch.
-5. Ripetere la procedura per la seconda scheda con il valore opposto.
+> Caricare entrambe le unità con la stessa configurazione può far rispondere entrambe le mani allo stesso comando.
 
-> ⚠️ **Attenzione:** caricare entrambe le schede con lo stesso valore causerà la risposta di entrambe le mani allo stesso pulsante.
+Per cablaggio, alimentazione e troubleshooting fare riferimento al manuale di installazione.
 
-### Telecomando (Arduino Nano)
+## Demo
 
-1. Aprire `code_telecomando.ino` nell'Arduino IDE.
-2. Selezionare **Arduino Nano** come scheda target.
-3. Caricare lo sketch. Nessuna configurazione aggiuntiva richiesta.
-
-Per istruzioni complete su collegamento hardware, alimentazione e risoluzione dei problemi, consultare il **[manuale di installazione](./manuale_di_installazione.docx)**.
+I video `natoduevolte.mp4` e `mano.mp4` mostrano il sistema fisico in funzione.
 
 ---
 
----
+# English
 
-## 🇬🇧 Project Description
+## Project description
 
-**Nato Due Volte** (*Born Twice*) is a carnival float presented at the **73rd edition of the Carnevale di Massafra**. This repository contains the firmware and documentation for the system controlling two **scenic robotic hands**, each composed of five independently actuated fingers driven by servo motors.
+**Nato Due Volte** (*Born Twice*) was a carnival float presented at the **73rd edition of the Carnevale di Massafra**. This repository documents the electronics and firmware built to control two **scenic robotic hands**, each with five independently actuated servo-driven fingers.
 
-The system relies on wireless radio-frequency communication between a **custom handheld remote controller** and two **independent control units**, one per hand. Each unit is built around a custom-designed Arduino shield integrating the RF module and servo connectors. The remote controller allows the operator to send up to **7 movement commands** to each hand, selected via a two-button-press combination.
+A custom handheld remote communicates by RF with two independent control units, one for each hand. Each hand controller uses an Arduino Mega 2560 and a custom shield, while the remote uses an Arduino Nano with its own custom shield.
 
-The repository includes Arduino firmware for both the control units and the remote controller, along with a complete bilingual installation manual.
+## Status and validation
 
----
+This project was **designed, built, programmed, integrated, and physically tested** for use on the float.
 
-## 📸 Demo
+Unlike some other repositories in this profile, the electronics design, firmware implementation, and system integration were performed **primarily directly by the author** through a hands-on development process. The finished system was tested in real operating conditions.
 
-Open videos natoduevolte.mp4 and mano.mp4 to see this project in action.
+For that reason, this repository is one of the most representative examples of the author's practical work in embedded electronics, PCB design, hardware-software integration, and field testing.
 
----
+## Design requirements
 
-## 🔧 Hardware & Components
+The main requirements were:
 
-### Component list
+- independent control of two hands;
+- five servos per hand;
+- reliable wireless operation;
+- simple interaction for a non-technical operator;
+- straightforward installation and maintenance;
+- adequate power delivery for the servo load;
+- multiple selectable motion commands for each hand.
 
-| Component | Qty | Notes |
-|---|---|---|
-| Arduino Mega 2560 | 2 | Control units (one per hand) |
-| Arduino Nano | 1 | Remote controller |
-| nRF24L01+ module | 3 | One per board |
-| Custom shield (Mega) | 2 | Custom-designed — includes J1–J7 connectors |
-| Custom shield (Nano) | 1 | Custom-designed — includes 7 push-buttons |
-| Servo motors | 10 | 5 per hand, 3-pin connector (DATA / 5V / GND) |
-| 5V / min. 8A PSU | 2 | One per control unit |
-| 5V powerbank | 1 | Remote controller power via USB-C |
+## Architecture
 
-### Servo connections (Mega shield)
-
-| Shield connector | Firmware index | Finger |
-|:----------------:|:--------------:|:------:|
-| J3 | 0 | Thumb |
-| J4 | 1 | Index |
-| J5 | 2 | Middle |
-| J6 | 3 | Ring |
-| J7 | 4 | Little |
-
----
-
-## 📂 Repository Structure
-
+```mermaid
+flowchart LR
+    OP[Operator] --> REMOTE[Handheld remote
+Arduino Nano]
+    REMOTE -->|nRF24L01+| CTRL1[Hand controller 1
+Arduino Mega]
+    REMOTE -->|nRF24L01+| CTRL2[Hand controller 2
+Arduino Mega]
+    CTRL1 --> S1[5 servos]
+    CTRL2 --> S2[5 servos]
 ```
+
+The remote can send up to **7 motion commands** to each hand through button combinations.
+
+## Hardware
+
+| Component | Qty | Purpose |
+|---|---:|---|
+| Arduino Mega 2560 | 2 | Hand control units |
+| Arduino Nano | 1 | Handheld remote |
+| nRF24L01+ | 3 | RF communication |
+| Custom Mega shield | 2 | RF and servo interfacing |
+| Custom Nano shield | 1 | Buttons and RF interface |
+| Servo motors | 10 | Finger actuation |
+| 5 V / min. 8 A PSU | 2 | Hand power supply |
+| 5 V power bank | 1 | Remote power supply |
+
+## Repository structure
+
+```text
 nato-due-volte/
-├── controller_code.ino            # Control unit firmware (Arduino Mega)
-├── code_telecomando.ino           # Remote controller firmware (Arduino Nano)
-└── manuale_di_installazione.docx  # Full installation manual (IT/EN)
+├── controller_code.ino
+├── code_telecomando.ino
+└── manuale_di_installazione.docx
 ```
 
----
+## Firmware installation
 
-## ⚙️ Firmware Installation
+Requirements:
 
-### Prerequisites
-- Arduino IDE
-- **RF24** library (installable via the Arduino IDE Library Manager)
+- Arduino IDE;
+- RF24 library.
 
-### Control units (Arduino Mega)
+Configure `USE_FIRST` appropriately for each Mega controller before uploading `controller_code.ino`. Upload `code_telecomando.ino` to the Arduino Nano.
 
-1. Open `controller_code.ino` in the Arduino IDE.
-2. At the `#define USE_FIRST` line, set:
-   - `true` for **controller #1**
-   - `false` for **controller #2**
-3. Select **Arduino Mega or Mega 2560** as the target board.
-4. Upload the sketch.
-5. Repeat for the second board with the opposite value.
+For wiring, power-supply details, and troubleshooting, see the installation manual.
 
-> ⚠️ **Warning:** flashing both boards with the same value will cause both hands to respond to the same button press.
+## Demo
 
-### Remote controller (Arduino Nano)
+The files `natoduevolte.mp4` and `mano.mp4` show the physical system in operation.
 
-1. Open `code_telecomando.ino` in the Arduino IDE.
-2. Select **Arduino Nano** as the target board.
-3. Upload the sketch. No additional configuration required.
+## License
 
-For complete hardware wiring, power supply, and troubleshooting instructions, refer to the **[installation manual](./manuale_di_installazione.docx)**.
-
----
-
-### Foto/Photos
-![1771791220092](1771791220092.jpeg)
-
----
-
-## 📄 Licenza / License
-
-Distribuito sotto licenza MIT. / Distributed under the MIT License.
+MIT License. See `LICENSE`.
